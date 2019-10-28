@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Art Project 2b</title>
+<style>
+
+	#container1 {
+		position: absolute;
+		width: 100%;
+		left: 0%;
+		height: 770px;
+		top: 0%;
+		border-style: solid;
+		background-image: url("Photoshop_4c.png");
+		background-size: cover;
+	}
+
+	#container2 {
+		position: absolute;
+		width: 100%;
+		left: 0%;
+		height: 770px;
+		top: 0%;
+		border-style: solid;
+		background-image: url("Photoshop_06.png");
+		background-size: cover;
+		opacity: 1;
+	}
+
+	#b1 {
+		position: absolute;
+		top: 0px;
+		left: 0%;
+		width: 150px;
+		animation-name: blossom_one;
+		animation-duration: 5s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	#b2 {
+		position: absolute;
+		top: 0px;
+		right: 0%;
+		width: 150px;
+		animation-name: blossom_two;
+		animation-duration: 10s;
+		animation-iteration-count: infinite;
+	}
+
+	#b3 {
+		position: absolute;
+		top: 0px;
+		left: 25%;
+		width: 150px;
+		animation-name: blossom_one;
+		animation-duration: 1s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	#b4 {
+		position: absolute;
+		top: 0px;
+		right: 25%;
+		width: 150px;
+		animation-name: blossom_two;
+		animation-duration: 2s;
+		animation-iteration-count: infinite;
+	}
+
+	#b5 {
+		position: absolute;
+		top: 0px;
+		left: 0%;
+		width: 150px;
+		animation-name: blossom_one;
+		animation-duration: 5s;
+		animation-iteration-count: infinite;
+		animation-timing-function: linear;
+	}
+
+	#b6 {
+		position: absolute;
+		top: 0px;
+		right: 0%;
+		width: 150px;
+		animation-name: blossom_two;
+		animation-duration: 10s;
+		animation-iteration-count: infinite;
+	}
+
+
+	@keyframes blossom_one{
+		0%{ transform: rotate(0deg);}
+		100%{ transform: rotate(360deg);}
+	}
+
+	@keyframes blossom_two{
+		0%{ transform: rotate(0deg);}
+		100%{ transform: rotate(360deg);}
+	}
+
+</style>
+
+  </head>
+
+  <body>
+
+  <div id="container1"> </div>
+  <div id="container2"> </div>
+  <img id="b1" src="blossom1.png"/>
+  <img id="b2" src="blossom2.png"/>
+  <img id="b3" src="blossom1.png"/>
+  <img id="b4" src="blossom2.png"/>
+  <img id="b5" src="blossom1.png"/>
+  <img id="b6" src="blossom2.png"/>
+
+	
+
+
+<audio id="myaudio" controls autoplay>
+	<source src = "Roxas.mp3" type="audio/mpeg">
+</audio>
+
+
+<script>
+	var blossom1 = document.getElementById("b1");
+	var blossom2 = document.getElementById("b2");
+	var blossom3 = document.getElementById("b3");
+	var blossom4 = document.getElementById("b4");
+	var blossom5 = document.getElementById("b5");
+	var blossom6 = document.getElementById("b6");
+
+
+	var position1 = [0,0];
+	var position2 = [0,0];
+	var position3 = [0,0];
+	var position4 = [0,0];
+	var position5 = [0,0];
+	var position6 = [0,0];
+
+	var increment1 = [1,1];
+	var increment2 = [1,1];
+	var increment3 = [1,1];
+	var increment4 = [1,1];
+	var increment5 = [1,1];
+	var increment6 = [1,1];
+
+	var motion1 = setInterval(function(){ increment1 = direction(position1, increment1); position1 = fall(blossom1, position1, increment1); }, 15);
+	var motion2 = setInterval(function(){increment2 = direction(position2, increment2); position2 = fall(blossom2, position2, increment2);}, 20);
+	var motion3 = setInterval(function(){ increment3 = direction(position3, increment3); position3 = fall(blossom3, position3, increment3); }, 35);
+	var motion4 = setInterval(function(){increment4 = direction(position4, increment4); position4 = fall(blossom4, position4, increment4);}, 40);
+	var motion5 = setInterval(function(){ increment5 = direction(position5, increment5); position5 = fall(blossom5, position5, increment5); }, 50);
+	var motion6 = setInterval(function(){increment6 = direction(position6, increment6); position6 = fall(blossom6, position6, increment6);}, 60);
+
+
+	var aud = document.getElementById("myaudio");
+
+	aud.onended = function() {var op = 1;
+    var fadeaway= setInterval(function(){fade("container2");},100);
+
+    function fade(id){var container = document.getElementById(id);
+
+    	if (op <= 0){
+    		clearInterval(fadeaway);
+    	} else {
+    		op=op-0.05;
+    		container.style.opacity=op;}
+    	}};
+
+
+function direction(position, increment){
+
+
+		var positionx= position[0];
+		var positiony = position[1];
+
+		var incrementx= increment[0];
+		var incrementy = increment[1];
+
+
+		if (positiony==0){
+			incrementy = 1;
+		}
+
+		if (positiony==650){
+			incrementy = -1;
+		}
+
+
+		if (positionx==0){
+			incrementx = 1;
+		}
+
+		if (positionx==90){
+			incrementx =-1;
+		}
+
+		var increment = [incrementx, incrementy]
+		return increment;
+
+}
+
+
+	function fall(blossom, position, increment) {
+
+
+		var positionx= position[0];
+		var positiony = position[1];
+
+		var incrementx= increment[0];
+		var incrementy = increment[1];
+
+			
+		positiony=positiony+(1 * incrementy);
+		blossom.style.top=positiony+"px";
+			
+		positionx=positionx+(1 * incrementx);
+
+		blossom.style.left=positionx+"%";
+
+		var position= [positionx, positiony];
+		
+		return position;
+		
+	}
+
+
+	blossom1.onclick= function(){clearInterval(motion1); document.getElementById("myaudio").pause();};
+	blossom2.onclick= function(){clearInterval(motion2);};
+	blossom3.onclick= function(){clearInterval(motion3);};
+	blossom4.onclick= function(){clearInterval(motion4);};
+	blossom5.onclick= function(){clearInterval(motion5);};
+	blossom6.onclick= function(){clearInterval(motion6);};
+
+</script>
+
+  </body>
+</html>
